@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/assets/carrot-GyKYkSK5.png" />
+    <title>Recipe Book</title>
+    <script type="module" crossorigin src="/assets/index-CSGJASkW.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-CMwDOVQl.css">
+  </head>
+
+  <style>
+    /* Reset pointer style */
+
+
+/* Yellow dot */
+.custom-pointer-dot {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  background-color: rgb(255, 174, 0);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1000;
+  transform: translate(-50%, -50%);
+}
+
+/* Green border circle */
+.custom-pointer-circle {
+  position: fixed;
+  width: 30px;
+  height: 30px;
+  border: 2px solid green;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 999;
+  transform: translate(-50%, -50%);
+}
+
+  </style>
+  <body>
+    <div id="root"></div>
+  </body>
+
+  <script>
+    // Create custom pointer elements
+const dot = document.createElement('div');
+const circle = document.createElement('div');
+
+// Add CSS classes
+dot.classList.add('custom-pointer-dot');
+circle.classList.add('custom-pointer-circle');
+
+// Append to body
+document.body.appendChild(dot);
+document.body.appendChild(circle);
+
+// Store target and current positions for smooth movement
+let targetX = 0, targetY = 0; // Target position of the cursor
+let currentDotX = 0, currentDotY = 0; // Current position of the dot
+let currentCircleX = 0, currentCircleY = 0; // Current position of the circle
+
+// Easing factors (dot moves faster than the circle)
+const dotEasing = 0.2; // Faster
+const circleEasing = 0.1; // Slower
+
+// Update cursor position
+document.addEventListener('mousemove', (event) => {
+  targetX = event.clientX;
+  targetY = event.clientY;
+});
+
+// Animate the cursor movement
+function animateCursor() {
+  // Interpolate dot position towards the target position
+  currentDotX += (targetX - currentDotX) * dotEasing;
+  currentDotY += (targetY - currentDotY) * dotEasing;
+
+  // Interpolate circle position towards the target position
+  currentCircleX += (targetX - currentCircleX) * circleEasing;
+  currentCircleY += (targetY - currentCircleY) * circleEasing;
+
+  // Apply positions to the elements
+  dot.style.left = `${currentDotX}px`;
+  dot.style.top = `${currentDotY}px`;
+
+  circle.style.left = `${currentCircleX}px`;
+  circle.style.top = `${currentCircleY}px`;
+
+  // Recursively call the animation function
+  requestAnimationFrame(animateCursor);
+}
+
+// Start the animation loop
+animateCursor();
+
+  </script>
+</html>
