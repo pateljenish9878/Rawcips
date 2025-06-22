@@ -111,7 +111,8 @@ const Login = () => {
                     >
                       {loading ? <Spinner size="sm" color="light" /> : "Let's go"}
                     </button>
-                    <p>Don't have an account? <Link to='/signup'>Sign Up</Link></p>
+                    <p>Don't have an account? <Link to='/signup'>Sign Up</Link></p><br>
+                    <p>Email: admin@gmail.com <br> Pass: Admin@123 </p>
                   </Form>
                 </Col>
               </Row>
